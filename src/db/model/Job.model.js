@@ -9,7 +9,9 @@ const JobSchema=new Schema({
     description:{type:[String],required:true},
     duration:{type:String,required:true},
     stipend:{type:Number,required:true},
-    creationDate:{type:Date,required:true}
+    creationDate:{type:Date,required:true},
+    companyId:{type:mongoose.ObjectId,required:true},
+    vacancies:{type:Number,required:true}
 })
 const JobModel=mongoose.model('Jobs',JobSchema)
 module.exports=JobModel
