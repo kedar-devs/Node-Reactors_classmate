@@ -5,6 +5,7 @@ const StudentRoute = require("./db/routes/Student.route")
 const ClassworkRoute = require("./db/routes/Classwork.route")
 const RecruitorRoute = require("./db/routes/Recruitor.route")
 const Bankhata=require("./db/routes/Bank.route")
+const JobRoute=require('./db/routes/Job.route')
 require("./db/mongoose");
 
 const app = express();
@@ -15,5 +16,6 @@ app.use('/student',StudentRoute)
 app.use('/recruitor',RecruitorRoute)
 app.use('/classwork',ClassworkRoute)
 app.use('/finance',Bankhata)
+app.use('/job',JobRoute)
 
 module.exports = app;
