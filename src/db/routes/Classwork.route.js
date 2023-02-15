@@ -123,7 +123,7 @@ router.post("/addStudent/:id", (req, res) => {
 //work fine required:(file name syllabus)
 router.post("/addSyllabus/:id", upload.single("syllabus"), (req, res) => {
   try {
-    console.log(req.body);
+    console.log(req.file);
     const url = req.protocol + "://" + req.get("host");
 
     User.findOne({ studentid: req.params.id })
@@ -175,6 +175,29 @@ router.put("/addAssign/:id", (req, res) => {
     return res.status(200).send({ message: "Error has Occured" });
   }
 });
+router.put('/update-Assign/:id',async(req,res)=>{
+  try{
+    const {id}=req.params
+    const {status}=req.boy
+    const FoundClassWork=await User.findOne({"assign._id":id})
+    if(FoundClassWork){
+      FoundClassWork.assign.statuse=status
+      FoundClassWork.save((err,user)=>{
+        if(err){
+          return res.status(400).send({message:err})
+        }
+        else{
+          return res.status(200).send({message:'Update was sucessful'})
+        }
+      })
+
+    }
+
+  }catch(err){
+    console.log(err)
+    return res.status(400).send({message:'Internal Server error'})
+  }
+})
 //works fine requires subject name faculty
 router.put("/addSubject/:id", (req, res) => {
   try {
@@ -321,7 +344,7 @@ router.get("/GetSub/:id", (req, res) => {
 //works fine requires content file and title
 router.put("/addNotes/:id", upload.single("content"), (req, res) => {
   try {
-    console.log(req.body);
+    console.log(req.body,req.file);
     const url = req.protocol + "://" + req.get("host");
     const content = url + "/Notes/" + req.file.filename;
     User.findOneAndUpdate(
@@ -451,7 +474,7 @@ router.put("/updateAssStatus/:id", (req, res) => {
 //check future ke liye
 router.put("/addCopy/:id", upload.single("content"), (req, res) => {
   try {
-    console.log(req.body.subid);
+    console.log(req.body.subid,req.file);
     const url = req.protocol + "://" + req.get("host");
     const content = url + "/Notes/" + req.file.filename;
     User.findOneAndUpdate(

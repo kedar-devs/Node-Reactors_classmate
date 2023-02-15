@@ -47,44 +47,19 @@ function AssignmentCard({ status, element }) {
       </CardContent>
                 <CardActions className={classes.badges}>
                     {
-                        status=="working"?
-              <Chip label="Working" color="primary" />:status=="review"?
+                        status==="working"?
+              <Chip label="Working" color="primary" />:status==="review"?
               <Chip label="Reviewing" color="secondary" />:
               <Chip label="Completed"  />
                     }
-              {/* <Chip variant="outlined" label="20" /> */}
+                      {
+                        status==="working"?
+              <Chip label="Update" color="secondary" onClick={()=>{pros.handleUpdate(element._id)}} />:status==="review"?
+              <Chip label="Update" color="secondary" onClick={()=>{pros.handleUpdate(element._id)}} />:
+              <></>
+                    }
           </CardActions>
             </Card>
-    {/* <Card className={classes.root} variant="outlined">
-      <CardContent>
-        <Typography variant="h5" component="h2">
-            Assignment Name
-        </Typography>
-        <Typography variant="body2" component="p">
-         Lorem ipsum dolor sit amet.
-                  <br />
-        </Typography>
-      </CardContent>
-      <CardActions className={classes.badges}>
-              <Chip label="for review" color="secondary" />
-              {/* <Chip variant="outlined" label="20" /> 
-          </CardActions>
-            </Card>
-    <Card className={classes.root} variant="outlined">
-      <CardContent>
-        <Typography variant="h5" component="h2">
-            Assignment Name
-        </Typography>
-        <Typography variant="body2" component="p">
-         Lorem ipsum dolor sit amet.
-                  <br />
-        </Typography>
-      </CardContent>
-      <CardActions className={classes.badges}>
-              <Chip label="completed"  />
-              <Chip variant="outlined" label="20" />
-          </CardActions>
-            </Card> */}
             </>
   );
 }
