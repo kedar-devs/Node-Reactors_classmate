@@ -4,6 +4,8 @@ import Card from '@material-ui/core/Card';
 import NoteIcon from '@material-ui/icons/Note';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import {CloudinaryContext} from 'cloudinary-react'
+import axios from'axios'
 import Pdf from "../Pdf/Pdf"
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,25 +22,37 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+const DownloadFile=(link)=>{
+    axios.get(link)
+    .then(result=>{
+        console.log(result)
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+}
+
 export default function NoteCard({data}) {
   const classes = useStyles();
     const [open, setopen] = useState(false)
-    console.log(data);
     return (
         <>
+        <CloudinaryContext>
             <Card className={classes.root} variant="outlined" container item justify="center" alignItem="center" onClick={() => {
                 setopen(true)
             }}>
-                <CardContent>
+                <CardContent >
                     <Typography variant="h5" component="h2">
                         <NoteIcon size="large"/> {"  "}
                         {data.title}
+                        <a href={data.link} download>download</a>
                     </Typography>
                 </CardContent>
             </Card>
                 {
-                    open==true?<Pdf data={data.link} />:<></>
+                    open==true?<Pdf data={data} />:<></>
                 }
+        </CloudinaryContext>
         </>
     );
 }

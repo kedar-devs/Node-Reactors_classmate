@@ -106,6 +106,7 @@ const AddNotes = ({id}) => {
         data.append("title",name)
 		data.append("content", file)
 		data.append("subid",id)
+		console.log(file)
         const multerimage=URL.createObjectURL(file)
         alert(multerimage)
         axios.put("http://localhost:5000/classwork/addNotes/"+id,data)
@@ -132,7 +133,6 @@ const AddNotes = ({id}) => {
 							InputProps={{
 								className: classes.fieldInput,
 					}}
-					className={classes.forminput}
 							onChange={e=>{
 								const {value}=e.target
 								setname(value)

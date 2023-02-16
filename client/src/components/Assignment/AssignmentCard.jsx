@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
+import axios from 'axios'
 import Typography from '@material-ui/core/Typography';
 import { Chip } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
@@ -30,9 +30,20 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+
 function AssignmentCard({ status, element }) {
+  const handleUpdate=(aid,status)=>{
+    axios.put(`http://localhost:5000/classwork/addAssStatus/${ element.subid}`,{aid,status})
+    .then(result=>{
+        alert('Status Updated Succesfully')
+        window.location.reload()
+
+    })
+    .catch(err=>{
+        alert('An Unknown error Occured')
+    })
+}
   const classes = useStyles();
-  // console.log(element);
     return (
       <>
     <Card className={classes.root} variant="outlined">
@@ -54,8 +65,8 @@ function AssignmentCard({ status, element }) {
                     }
                       {
                         status==="working"?
-              <Chip label="Update" color="secondary" onClick={()=>{pros.handleUpdate(element._id)}} />:status==="review"?
-              <Chip label="Update" color="secondary" onClick={()=>{pros.handleUpdate(element._id)}} />:
+              <Chip label="Update" color="secondary" onClick={()=>{handleUpdate(element._id,0)}} />:status==="review"?
+              <Chip label="Update" color="primary" onClick={()=>{handleUpdate(element._id,1)}} />:
               <></>
                     }
           </CardActions>

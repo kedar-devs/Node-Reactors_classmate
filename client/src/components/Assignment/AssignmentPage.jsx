@@ -17,17 +17,7 @@ export default class AssignmentPage extends Component {
         }
       
     }
-    handleUpdate=(aid)=>{
-        axios.put(`http://localhost:5000/classwork/addAssStatus/${ this.props.id}`,{aid})
-        .then(result=>{
-            alert('Status Updated Succesfully')
-            window.location.reload()
-
-        })
-        .catch(err=>{
-            alert('An Unknown error Occured')
-        })
-    }
+    
     componentDidMount() {
            let token = JSON.parse(localStorage.getItem("classmate"))
         if (!token)
@@ -69,8 +59,8 @@ export default class AssignmentPage extends Component {
         return (
             <>
         <Grid container item direction="row" justify="space-around">
-            <AssignmentSection status="working" data={this.state.works} handleUpdate={this.handleUpdate}/>
-                <AssignmentSection status="review" data={this.state.reviews} handleUpdate={this.handleUpdate}/>
+            <AssignmentSection status="working" data={this.state.works} />
+                <AssignmentSection status="review" data={this.state.reviews} />
                     <AssignmentSection status="done" data={this.state.dones}/>
                 </Grid>
                     <AddAssignment data={this.props.id} />
