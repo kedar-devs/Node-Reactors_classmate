@@ -8,22 +8,9 @@ const saltRound = 8;
 const nodemailer = require("nodemailer");
 
 const crypto = require("crypto");
-let multer = require("multer"),
-  uuidv4 = require("uuidv4");
-const DIR = "./Notes/";
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, DIR);
-  },
-  filename: (req, file, cb) => {
-    const filename = file.originalname.toLowerCase().split(" ").join("-");
-    cb(null, uuidv4 + "-" + filename);
-  },
-});
-var upload = multer({
-  storage: storage,
-});
+  uuidv4 = require("uuidv4");
+
 
 const transporter = nodemailer.createTransport({
   service: "Gmail",
@@ -235,7 +222,7 @@ router.post("/new-password", (req, res) => {
     return res.status(500).send({ message: "Error Occured" });
   }
 });
-router.post("/AddResume", upload.single("resume"), (req, res) => {
+router.post("/AddResume",  (req, res) => {
   try {
     const url = req.protocol + "://" + req.get("host");
 

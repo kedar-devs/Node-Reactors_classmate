@@ -1,28 +1,14 @@
 const router = require("express").Router();
 let User = require("../model/Classwork.model");
-let multer = require("multer"),
-  uuidv4 = require("uuidv4");
-
+let streamifier=require('./../Helper/FileUploader')
+require('dotenv').config()
 var cloudinary = require("cloudinary").v2;
 cloudinary.config({
-  cloud_name: "savishkar",
-  api_key: "485787349522969",
-  api_secret: "zOTZ3DN66ch5LSY7cqcjf5yVu3E",
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
 });
-const DIR = "./Notes/";
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, DIR);
-  },
-  filename: (req, file, cb) => {
-    const filename = file.originalname.toLowerCase().split(" ").join("-");
-    cb(null, uuidv4 + "-" + filename);
-  },
-});
-var upload = multer({
-  storage: storage,
-});
 const nodemailer = require("nodemailer");
 const transporter = nodemailer.createTransport({
   service: "Gmail",
@@ -121,7 +107,7 @@ router.post("/addStudent/:id", (req, res) => {
   }
 });
 //work fine required:(file name syllabus)
-router.post("/addSyllabus/:id", upload.single("syllabus"), (req, res) => {
+router.post("/addSyllabus/:id", (req, res) => {
   try {
     console.log(req.file);
     const url = req.protocol + "://" + req.get("host");
@@ -342,16 +328,17 @@ router.get("/GetSub/:id", (req, res) => {
   }
 });
 //works fine requires content file and title
-router.put("/addNotes/:id", upload.single("content"), (req, res) => {
+router.put("/addNotes/:id",async (req, res) => {
   try {
-    console.log(req.body,req.file);
-    const url = req.protocol + "://" + req.get("host");
-    const content = url + "/Notes/" + req.file.filename;
+    console.log(req.body,req.files.content);
+    let file=req.files.content
+    const url1=await streamifier.UploadFile(file)
+    console.log(url1)
     User.findOneAndUpdate(
       { "subject._id": req.body.subid },
       {
         $push: {
-          "subject.$[outer].notes": { link: content, title: req.body.title },
+          "subject.$[outer].notes": { link: url1.url, title: req.body.title },
         },
       },
       { arrayFilters: [{ "outer._id": req.body.subid }] }
@@ -361,6 +348,7 @@ router.put("/addNotes/:id", upload.single("content"), (req, res) => {
         res.status(200).send("Notes Added successfully");
       })
       .catch((err) => {
+        console.log(err)
         res.status(500).send(err);
       });
   } catch (err) {
@@ -428,7 +416,7 @@ router.put("/addAssStatus/:id", (req, res) => {
       { "assign._id": req.body.aid },
       {
         $set: {
-          "assign.$[outer].statuse": 0,
+          "assign.$[outer].statuse": req.body.status,
         },
       },
       { arrayFilters: [{ "outer._id": req.body.aid }] }
@@ -472,7 +460,7 @@ router.put("/updateAssStatus/:id", (req, res) => {
   }
 });
 //check future ke liye
-router.put("/addCopy/:id", upload.single("content"), (req, res) => {
+router.put("/addCopy/:id",  (req, res) => {
   try {
     console.log(req.body.subid,req.file);
     const url = req.protocol + "://" + req.get("host");

@@ -6,12 +6,13 @@ const ClassworkRoute = require("./db/routes/Classwork.route")
 const RecruitorRoute = require("./db/routes/Recruitor.route")
 const Bankhata=require("./db/routes/Bank.route")
 const JobRoute=require('./db/routes/Job.route')
+const fileUpload=require('express-fileupload')
 require("./db/mongoose");
 
 const app = express();
 app.use(cors())
 app.use(express.json());
-app.use('/Notes',express.static(path.join(__dirname+'/Notes')))
+app.use(fileUpload());
 app.use('/student',StudentRoute)
 app.use('/recruitor',RecruitorRoute)
 app.use('/classwork',ClassworkRoute)
