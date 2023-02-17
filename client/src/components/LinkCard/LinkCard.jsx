@@ -26,7 +26,7 @@ export default function NoteCard({data}) {
 
     return (
         <>
-            <a href={"http://"+data.link} target="_blank" className={classes.link}>
+            <a href={data.link} target="_blank" className={classes.link}>
                 <Card className={classes.root} variant="outlined" container item  justify="center" alignItem="center">
                     <CardContent>
                         <Typography variant="h5" component="h2">

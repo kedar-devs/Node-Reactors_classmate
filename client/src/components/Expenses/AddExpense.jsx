@@ -81,7 +81,15 @@ const AddExpense = (props) => {
 	const submit = (values, { setSubmitting }) => {
 		setTimeout(() => {
 			setSubmitting(false)
-			alert(JSON.stringify(values, null, 2))
+			let token = JSON.parse(localStorage.getItem("classmate"))
+			axios.post(`http://localhost:5000/finance/add/${token.userId}`,{reason:values.expense,amount:values.amount})
+			.then(result=>{
+				alert(result)
+			})
+			.catch(err=>{
+				console.log(err)
+			})
+			
 		}, 500)
 	}
 

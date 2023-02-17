@@ -4,7 +4,8 @@ import Card from '@material-ui/core/Card';
 import NoteIcon from '@material-ui/icons/Note';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import {CloudinaryContext} from 'cloudinary-react'
+import {CloudinaryContext,Image,Transformation} from 'cloudinary-react'
+import fileDownload from 'js-file-download'
 import axios from'axios'
 import Pdf from "../Pdf/Pdf"
 const useStyles = makeStyles((theme) => ({
@@ -22,10 +23,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const DownloadFile=(link)=>{
-    axios.get(link)
-    .then(result=>{
-        console.log(result)
+const DownloadFile=(link,title)=>{
+    axios.get(link,{
+        responseType: "blob"
+      })
+    .then(res=>{
+        console.log(res)
+        fileDownload(res.data, title);
     })
     .catch(err=>{
         console.log(err)
@@ -37,15 +41,18 @@ export default function NoteCard({data}) {
     const [open, setopen] = useState(false)
     return (
         <>
-        <CloudinaryContext>
-            <Card className={classes.root} variant="outlined" container item justify="center" alignItem="center" onClick={() => {
-                setopen(true)
-            }}>
+        <CloudinaryContext cloud_name='dw8ery8pa'>
+            <Card className={classes.root} variant="outlined" container item justify="center" alignItem="center">
                 <CardContent >
                     <Typography variant="h5" component="h2">
                         <NoteIcon size="large"/> {"  "}
                         {data.title}
-                        <a href={data.link} download>download</a>
+                        <a href={data.link} target="_blank" download>
+                            download
+                            <Image publicid={data.title}>
+                                <Transformation fetchFormat="auto" />
+                            </Image>
+                        </a>
                     </Typography>
                 </CardContent>
             </Card>
