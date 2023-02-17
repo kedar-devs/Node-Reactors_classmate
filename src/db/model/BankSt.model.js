@@ -9,7 +9,7 @@ const BankSchema=Schema({
     userid:{type:String,required:true},
     record:[KhataBooK],
     totalexpenses:{type:Number,required:true},
-    useremail:{type:String,required:true}
+    useremail:{type:String}
 })
 const bank=mongoose.model('Bank',BankSchema)
 module.exports=bank
