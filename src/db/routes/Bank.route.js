@@ -38,7 +38,7 @@ cron.schedule("2-4 58 0 1-31 * *", (req, res) => {
     }
   });
 });
-router.post("/add/:id", (req, res) => {
+router.post("/add/:id", async(req, res) => {
   try {
     console.log(req.body);
     const userid = req.params.id;
@@ -47,6 +47,7 @@ router.post("/add/:id", (req, res) => {
       Amount: req.body.amount,
       date: Date(),
     };
+    
     const totalexpenses = req.body.amount;
     const useremail = req.body.useremail;
     const newUser = new User({ userid, totalexpenses, record, useremail });
