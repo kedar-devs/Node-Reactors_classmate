@@ -139,7 +139,7 @@ router.get("/getExpenses/:id", (req, res) => {
       .catch((err) => res.status(500).send(err));
   } catch (err) {
     console.log(err);
-    return res.status(200).send({ message: "Error has Occured" });
+    return res.status(400).send({ message: "Error has Occured" });
   }
 });
 module.exports = router;
