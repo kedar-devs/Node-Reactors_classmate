@@ -31,8 +31,8 @@ function Expense({ expense }) {
 			alignItems='center'
 			className={classes.root}
 		>
-			<Typography className={classes.expense}>{expense.expense}</Typography>
-			<Typography className={classes.amount}>{`₹${expense.amount}`}</Typography>
+			<Typography className={classes.expense}>{expense.reasons}</Typography>
+			<Typography className={classes.amount}>{`₹${expense.Amount}`}</Typography>
 		</Grid>
 	)
 }

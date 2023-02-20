@@ -2,6 +2,7 @@ import React from 'react'
 import { Button, Grid, Typography } from "@material-ui/core"
 import notes from "../../assets/homepagenotetaker.svg"
 import { makeStyles } from '@material-ui/core/styles';
+import { useHistory } from 'react-router-dom';
 import {Link} from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
@@ -49,7 +50,9 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 function Landingpage() {
+    let history=useHistory()
     const classes=useStyles()
+    if(localStorage.getItem('classmate')===undefined){
     return (
         <Grid container className={classes.landingpage} alignItems="center" >
             <Grid container direction="column" item sm={6}>
@@ -78,6 +81,9 @@ function Landingpage() {
             </Grid>
         </Grid>
     )
+    }else{
+        history.push('/home')
+    }
 }
 
 export default Landingpage

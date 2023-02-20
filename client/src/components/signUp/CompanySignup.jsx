@@ -8,6 +8,7 @@ import {
 } from '@material-ui/core'
 import { Formik, Form, Field } from 'formik'
 import { TextField } from 'formik-material-ui'
+import { useHistory } from 'react-router-dom'
 import React from 'react'
 import axios from "axios"
 const useStyles = makeStyles((theme) =>
@@ -97,6 +98,7 @@ const useStyles = makeStyles((theme) =>
 )
 
 const CompanySignup = ({ signUp, company }) => {
+	const history=useHistory()
 	const classes = useStyles()
 	const initialValues = {
 		firstname: '',
@@ -118,6 +120,8 @@ const CompanySignup = ({ signUp, company }) => {
 			axios.post("http://localhost:5000/recruitor/add", values)
 				.then(res => {
 				console.log("Company successfully added");
+				history.push('/')
+
 				}).catch(err => {
 					console.log("Error here in registering the user");
 					console.log(err);

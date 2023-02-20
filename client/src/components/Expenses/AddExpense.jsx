@@ -8,6 +8,7 @@ import {
 } from '@material-ui/core'
 import { Formik, Form, Field } from 'formik'
 import { TextField } from 'formik-material-ui'
+import { useHistory } from 'react-router-dom'
 import React from 'react'
 import axios from 'axios'
 const useStyles = makeStyles((theme) =>
@@ -75,6 +76,7 @@ const useStyles = makeStyles((theme) =>
 )
 
 const AddExpense = (props) => {
+	let history=useHistory()
 	const classes = useStyles()
 	const initialValues = { expense: '', amount: null }
 
@@ -84,7 +86,7 @@ const AddExpense = (props) => {
 			let token = JSON.parse(localStorage.getItem("classmate"))
 			axios.post(`http://localhost:5000/finance/add/${token.userId}`,{reason:values.expense,amount:values.amount})
 			.then(result=>{
-				alert(result)
+				history.push('/expenses')
 			})
 			.catch(err=>{
 				console.log(err)

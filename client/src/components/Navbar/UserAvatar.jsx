@@ -4,6 +4,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Avatar from '@material-ui/core/Avatar';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
@@ -22,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function MenuAppBar() {
+  const history=useHistory()
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -31,7 +33,9 @@ export default function MenuAppBar() {
   };
 
   const handleClose = () => {
+    localStorage.removeItem('classmate')
       setAnchorEl(null);
+      history.push('/')
       
   };
 
