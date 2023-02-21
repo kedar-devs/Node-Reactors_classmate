@@ -52,7 +52,8 @@ const useStyles = makeStyles((theme) => ({
 function Landingpage() {
     let history=useHistory()
     const classes=useStyles()
-    if(localStorage.getItem('classmate')===undefined){
+    console.log(localStorage.getItem('classmate'))
+    if(localStorage.getItem('classmate')===null){
     return (
         <Grid container className={classes.landingpage} alignItems="center" >
             <Grid container direction="column" item sm={6}>

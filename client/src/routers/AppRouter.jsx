@@ -10,7 +10,8 @@ import CompanySignup from '../components/signUp/CompanySignup'
 import AddSubject from '../components/AddWidgets/AddSubject'
 import TestModal from '../components/TestModal'
 import SubjectPage from "../components/Subject/Subjectcard"
-import AddClasswork from '../components/AddWidgets/AddClasswork'
+import CompanySidebar from '../components/SubjectPage/CompanySideBar'
+import AddJob from './../components/JobPosting/AddJob'
 import Home from '../components/Home/Home'
 import Sidebar from '../components/SubjectPage/Sidebar'
 import Jobs from '../components/Jobs/Jobs'
@@ -53,10 +54,12 @@ const AppRouter = () => (
 			<Route path='/testmodal' component={TestModal} exact={true} />
 			<Route path="/subjects" component={SubjectPage} />
 			<Route path="/subject/:id" component={Sidebar} />
+			<Route path='/company/:id' component={CompanySidebar} />
 			<Route path='/home' component={Home} exact={true} />
 			{/* <Route path='/classwork' component={Sidebar} /> */}
 			<Route path='/jobs' component={Jobs} exact={true} />
 			<Route path='/jobs/:id' component={JobDescription} exact={true} />
+			<Route path='/addjob/:id' component={AddJob} />
 			<Route path='/loans' component={Loans} exact={true} />
 			<Route path='/analytics' component={Analytics} exact={true} />
 			<Route path='/addexpense' component={AddExpense} exact={true} />

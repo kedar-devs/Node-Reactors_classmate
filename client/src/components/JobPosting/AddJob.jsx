@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core'
 import { Formik, Form, Field } from 'formik'
 import { TextField } from 'formik-material-ui'
-import { useHistory } from 'react-router-dom'
+import { useHistory,useParams } from 'react-router-dom'
 import React from 'react'
 import axios from "axios"
 const useStyles = makeStyles((theme) =>
@@ -97,21 +97,19 @@ const useStyles = makeStyles((theme) =>
 	})
 )
 
-const CompanySignup = ({ signUp, company }) => {
+const JobSignUp = ({ signUp, company }) => {
+    const {id}=useParams
 	const history=useHistory()
 	const classes = useStyles()
 	const initialValues = {
-		firstname: '',
-		lastname: '',
-		CompanyName: '',
-		CompanyLoc: '',
-		email: '',
-		password: '',
-		confirmPassword: '',
-		numberemp: '',
+		Role: '',
+		JobType: '',
+		jobTitle: '',
+		Skills: '',
 		description: '',
-		type: '',
-		tag: '',
+		duration: '',
+		stipend: 0,
+		vacancies: 0
 	}
 
 	const submit = (values, { setSubmitting }) => {
@@ -120,11 +118,7 @@ const CompanySignup = ({ signUp, company }) => {
 			axios.post("http://localhost:5000/recruitor/add", values)
 				.then(res => {
 				console.log("Company successfully added");
-				localStorage.setItem('classmateRecruitor',{
-					token:res.data.token,
-					compId:res.data.user._id
-				})
-				history.push(`/company/${res.data.user._id}`)
+				history.push('/')
 
 				}).catch(err => {
 					console.log("Error here in registering the user");
@@ -135,46 +129,29 @@ const CompanySignup = ({ signUp, company }) => {
 
 	const validate = (values) => {
 		const errors = {}
-		if (!values.firstname) {
-			errors.firstname = 'Required'
+		if (!values.Role) {
+			errors.Role = 'Required'
 		}
-		if (!values.lastname) {
-			errors.lastname = 'Required'
+		if (!values.Jobtype) {
+			errors.Jobtype = 'Required'
 		}
-		if (!values.CompanyName) {
-			errors.CompanyName = 'Required'
+		if (!values.jobTitle) {
+			errors.jobTitle = 'Required'
 		}
-		if (!values.CompanyLoc) {
-			errors.CompanyLoc = 'Required'
-		}
-		if (!values.type) {
-			errors.type = 'Required'
-		}
-		if (!values.tag) {
-			errors.tag = 'Required'
+		if (!values.Skills) {
+			errors.Skills = 'Required'
 		}
 		if (!values.description) {
 			errors.description = 'Required'
 		}
-		if (!values.numberemp) {
-			errors.numberemp = 'Required'
+		if (!values.stipend) {
+			errors.stipend = 'Required'
 		}
-		if (!values.email) {
-			errors.email = 'Required'
-		} else if (
-			!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-		) {
-			errors.email = 'Invalid email address'
+		if (!values.duration) {
+			errors.duration = 'Required'
 		}
-		if (!values.password) {
-			errors.password = 'Required'
-		} else if (values.password.length < 8) {
-			errors.password = 'Password must be atleast 8 characters long!'
-		}
-		if (!values.confirmPassword) {
-			errors.confirmPassword = 'Required'
-		} else if (values.password !== values.confirmPassword) {
-			errors.confirmPassword = 'Passwords must match!'
+		if (!values.vacancies) {
+			errors.vacancies = 'Required'
 		}
 		return errors
 	}
@@ -201,9 +178,9 @@ const CompanySignup = ({ signUp, company }) => {
 								<Field
 									className={classes.field}
 									component={TextField}
-									name='firstname'
+									name='Role'
 									type='text'
-									label='First Name'
+									label='Role'
 									variant='outlined'
 									InputProps={{
 										className: classes.fieldInput,
@@ -213,9 +190,9 @@ const CompanySignup = ({ signUp, company }) => {
 								<Field
 									className={classes.field}
 									component={TextField}
-									name='lastname'
+									name='Jobtype'
 									type='text'
-									label='Last Name'
+									label='Job Type'
 									variant='outlined'
 									InputProps={{
 										className: classes.fieldInput,
@@ -227,9 +204,9 @@ const CompanySignup = ({ signUp, company }) => {
 								<Field
 									className={classes.field}
 									component={TextField}
-									name='CompanyName'
+									name='jobTitle'
 									type='text'
-									label='Company Name'
+									label='Job Title'
 									variant='outlined'
 									InputProps={{
 										className: classes.fieldInput,
@@ -239,9 +216,9 @@ const CompanySignup = ({ signUp, company }) => {
 								<Field
 									className={classes.field}
 									component={TextField}
-									name='CompanyLoc'
+									name='Skills'
 									type='text'
-									label='Company Location'
+									label='Skills Required'
 									variant='outlined'
 									InputProps={{
 										className: classes.fieldInput,
@@ -253,9 +230,9 @@ const CompanySignup = ({ signUp, company }) => {
 								<Field
 									className={classes.field}
 									component={TextField}
-									name='type'
+									name='description'
 									type='text'
-									label='Company type'
+									label='Job Description'
 									variant='outlined'
 									InputProps={{
 										className: classes.fieldInput,
@@ -265,75 +242,43 @@ const CompanySignup = ({ signUp, company }) => {
 								<Field
 									className={classes.field}
 									component={TextField}
-									name='tag'
-									type='text'
-									label='Company Tag'
+									name='stipend'
+									type='number'
+									label='Company stipend'
 									variant='outlined'
 									InputProps={{
 										className: classes.fieldInput,
 									}}
 								/>
+                                <br />
 							</div>
-							<br/>
+                            <br />
 							<Field
 								className={classes.field}
 								component={TextField}
-								name='description'
-								type='text'
-								label='Company description'
+								name='duration'
+								type='number'
+								label='Duration(in Months)'
+                                placeholder="place -1 for full time"
 								variant='outlined'
 								InputProps={{
 									className: classes.fieldInput1,
 								}}
 							/>
-							<br/>
-							<Field
+                              <br />
+                            <Field
 								className={classes.field}
 								component={TextField}
-								name='numberemp'
-								type='text'
-								label='No of employess in company'
+								name='vacancies'
+								type='number'
+								label='vacancies'
+                                placeholder="place -1 for full time"
 								variant='outlined'
 								InputProps={{
 									className: classes.fieldInput1,
 								}}
 							/>
-							<br/>
-							<Field
-								className={classes.field}
-								component={TextField}
-								name='email'
-								type='email'
-								label='Email Id'
-								variant='outlined'
-								InputProps={{
-									className: classes.fieldInput1,
-								}}
-							/>
-							<br />
-							<Field
-								className={classes.field}
-								component={TextField}
-								type='password'
-								label='Password'
-								name='password'
-								variant='outlined'
-								InputProps={{
-									className: classes.fieldInput1,
-								}}
-							/>
-							<br />
-							<Field
-								className={classes.field}
-								component={TextField}
-								type='password'
-								label='Confirm Password'
-								name='confirmPassword'
-								variant='outlined'
-								InputProps={{
-									className: classes.fieldInput1,
-								}}
-							/>
+                              <br />
 							{isSubmitting && <LinearProgress />}
 						</div>
 
@@ -346,7 +291,7 @@ const CompanySignup = ({ signUp, company }) => {
 								onClick={submitForm}
 								color='primary'
 							>
-								Sign Up
+								Submit
 							</Button>
 						</div>
 						<br />
@@ -358,4 +303,4 @@ const CompanySignup = ({ signUp, company }) => {
 	)
 }
 
-export default CompanySignup
+export default JobSignUp

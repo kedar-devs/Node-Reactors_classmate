@@ -103,6 +103,11 @@ const LoginForm = ({ signUp, company ,history}) => {
 				axios.post("http://localhost:5000/recruitor/login", values)
 					.then(res => {
 						console.log("Company authenticated");
+						localStorage.setItem('classmateRecruitor',{
+							token:res.data.token,
+							compId:res.data.user._id
+						})
+						history.push(`/company/${res.data.user._id}`)
 					}).catch(err => {
 						console.log("There is an error here in authenticating the company");
 						console.log(err);
