@@ -59,6 +59,20 @@ exports.getJob=async(req,res)=>{
     return res.status(400).send({message:err})
 }
 }
+exports.getJobByCompany=async(req,res)=>{
+    try{
+        const FoundJob=await JobModel.find({companyId:req.params.id})
+        if(FoundJob){
+            return res.status(200).send({FoundJob})
+        }
+        else{
+            return res.status(404).send({message:"No Job Found"})
+        }
+    }catch(err){
+        console.log(err)
+        return res.status(400).send({message:err})
+    }
+}
 
 exports.updateVacancies=async(req,res)=>{
     try{

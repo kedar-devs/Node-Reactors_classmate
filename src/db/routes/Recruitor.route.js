@@ -63,7 +63,7 @@ router.route("/add").post((req, res) => {
         } else {
           let payload = { subject: user.email };
           let token = jwt.sign(payload, process.env.SECRET_KEY);
-          res.status(200).send({ token });
+          res.status(200).send({ user,token });
         }
       });
     });
