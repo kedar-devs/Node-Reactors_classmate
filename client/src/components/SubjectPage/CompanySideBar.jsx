@@ -20,7 +20,7 @@ const CompanySideBar = (props) => {
     const [jobs,setJobs]=useState([])
     const [loading,setLoading]=useState(true)
     useEffect(()=>{
-            let user=localStorage.getItem('classmateRecruitor')
+            let user=JSON.parse(localStorage.getItem('classmateRecruitor'))
             Axios.get(`http://localhost:5000/job/GetByCompany/${user.compId}`)
             .then(res=>{
                 setJobs(res.data.FoundJob)

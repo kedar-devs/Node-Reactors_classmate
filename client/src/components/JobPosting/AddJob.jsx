@@ -98,7 +98,7 @@ const useStyles = makeStyles((theme) =>
 )
 
 const JobSignUp = ({ signUp, company }) => {
-    const {id}=useParams
+    const {id}=useParams()
 	const history=useHistory()
 	const classes = useStyles()
 	const initialValues = {
@@ -109,13 +109,15 @@ const JobSignUp = ({ signUp, company }) => {
 		description: '',
 		duration: '',
 		stipend: 0,
-		vacancies: 0
+		vacancies: 0,
+		
 	}
 
 	const submit = (values, { setSubmitting }) => {
 		setTimeout(() => {
 			setSubmitting(false)
-			axios.post("http://localhost:5000/recruitor/add", values)
+			console.log(id)
+			axios.post(`http://localhost:5000/job/Create/${id}`,values)
 				.then(res => {
 				console.log("Company successfully added");
 				history.push('/')

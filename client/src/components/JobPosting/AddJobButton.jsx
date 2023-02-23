@@ -19,7 +19,8 @@ export default function AddAssignment({data}) {
     const classes = useStyles()
 	const [open, setOpen] = React.useState(false)
     const navigate=()=>{
-        let user=localStorage.getItem('classmateRecruitor')
+        let user=JSON.parse(localStorage.getItem('classmateRecruitor'))
+        console.log(user)
         history.push(`/addjob/${user.compId}`)
     }
 	const handleOpen = () => {
