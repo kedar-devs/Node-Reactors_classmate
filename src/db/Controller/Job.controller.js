@@ -1,7 +1,9 @@
 const JobModel=require('./../model/Job.model')
 exports.AddJobs=async(req,res)=>{
     try{
-    const {Role,Jobtype,jobTitle,Skills,description,duration,stipend,companyId,vacancies}=req.body
+        console.log(req.body)
+        let companyId=req.params.id
+    const {Role,Jobtype,jobTitle,Skills,description,duration,stipend,vacancies}=req.body
     const newJob={
         Role:Role,
         Jobtype:Jobtype,
@@ -17,6 +19,7 @@ exports.AddJobs=async(req,res)=>{
     const Job=new JobModel(newJob)
     Job.save((err,user)=>{
         if(err){
+            
             return res.status(400).send({message:err})
         }
         else{
