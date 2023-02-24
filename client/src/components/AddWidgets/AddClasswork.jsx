@@ -143,6 +143,7 @@ const AddClasswork = ({id}) => {
 				.then(res => {
 					console.log("data successfully entered")
 					console.log(res);
+					window.location.reload()
 					// history.push("/subject/"+id)
 				}).catch(err => {
 					console.log("There is an error in add an assignment");

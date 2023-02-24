@@ -93,7 +93,7 @@ const AddSubject = ({history}) => {
 				.then(res => {
 					console.log("Successfully added a subject");
 					console.log(res);
-					history.push("/subjects")
+					window.location.reload()
 				}).catch(err => {
 					console.log("There is an error here in adding the subject");
 					console.log(err);

@@ -9,6 +9,7 @@ import { Chip } from '@material-ui/core'
 import WorkIcon from '@material-ui/icons/Work'
 import BusinessIcon from '@material-ui/icons/Business'
 import LocationOnIcon from '@material-ui/icons/LocationOn'
+import {ReactComponent as Psych} from './psych.svg'
 import { Link } from 'react-router-dom'
 
 
@@ -53,18 +54,18 @@ export default function OutlinedCard({ job }) {
 						color='secondary'
 						icon={<WorkIcon />}
 						size='small'
-						label={job.post}
+						label={job.Role}
 						className={classes.chip}
 					/>
 				</Typography>
 				<Typography variant='h5' component='h2'>
-					{job.Role}
+					{job.jobTitle}
 				</Typography>
 				<Typography className={classes.pos} color='textSecondary'>
-					<BusinessIcon className={classes.icon} /> {job.JobTitle}
+					<BusinessIcon className={classes.icon} /> {job.Jobtype}
 				</Typography>
 				<Typography className={classes.pos} color='textSecondary'>
-					<LocationOnIcon className={classes.icon} /> {job.Skills}
+					<Psych className={classes.icon} /> {job.Skills}
 				</Typography>
 			</CardContent>
 			<CardActions>

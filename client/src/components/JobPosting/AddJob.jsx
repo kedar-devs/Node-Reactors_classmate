@@ -120,7 +120,7 @@ const JobSignUp = ({ signUp, company }) => {
 			axios.post(`http://localhost:5000/job/Create/${id}`,values)
 				.then(res => {
 				console.log("Company successfully added");
-				history.push('/')
+				history.push(`/company/${id}`)
 
 				}).catch(err => {
 					console.log("Error here in registering the user");

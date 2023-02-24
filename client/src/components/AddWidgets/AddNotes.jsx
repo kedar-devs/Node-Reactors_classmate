@@ -112,6 +112,7 @@ const AddNotes = ({id}) => {
         axios.put("http://localhost:5000/classwork/addNotes/"+id,data)
         .then(res=>{
             console.log(res)
+			window.location.reload()
         }).catch(err=>{
             console.log(err)
         })

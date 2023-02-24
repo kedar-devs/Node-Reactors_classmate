@@ -102,7 +102,7 @@ const AddLink = ({id,history}) => {
 				.then(res => {
 					console.log("data successfully entered")
 					console.log(res);
-					history.push("/subject/" + id)
+					window.location.reload()
 				}).catch(err => {
 					console.log("There is an error in add a link");
 					console.log(err);

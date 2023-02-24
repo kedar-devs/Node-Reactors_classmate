@@ -114,6 +114,7 @@ const AddResume = ({id,history}) => {
         axios.post("http://localhost:5000/student/AddResume",data)
         .then(res=>{
             console.log(res)
+			window.location.reload()
         }).catch(err=>{
             console.log(err)
         })
