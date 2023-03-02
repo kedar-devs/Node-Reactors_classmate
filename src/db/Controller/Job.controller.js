@@ -1,4 +1,5 @@
 const JobModel=require('./../model/Job.model')
+const RecruitorModel=require('./../model/Recruitor.model')
 exports.AddJobs=async(req,res)=>{
     try{
         console.log(req.body)
@@ -93,5 +94,44 @@ exports.updateVacancies=async(req,res)=>{
 }catch(err){
     console.log(err)
     return res.status(400).send({message:err})
+}
+}
+
+exports.getJobDetails=async(req,res)=>{
+    try{
+    const {id}=req.params
+    const FoundJob=await JobModel.findOne({_id:id})
+    if(FoundJob){
+        const responseData={
+            compName:'',
+            location:'',
+            role:FoundJob.Role,
+            jobTitle:FoundJob.jobTitle,
+            recrName:'',
+            recEmail:'',
+            numEmp:'',
+            desc:FoundJob.description,
+            jobType:FoundJob.Jobtype,
+            skills:FoundJob.Skills[0]
+        }
+
+        const FoundCompany=await RecruitorModel.findOne({_id:FoundJob.companyId})
+        if(FoundCompany){
+            responseData.compName=FoundCompany.CompanyName
+            responseData.location=FoundCompany.CompanyLoc
+            responseData.numEmp=FoundCompany.numberemp
+            responseData.recEmail=FoundCompany.email
+            responseData.recName=FoundCompany.firstname+' '+FoundCompany.lastname
+            return res.status(200).send(responseData)
+        }
+        else{
+            return res.status(404).send({message:'No company found'})
+        }
+    }
+    else{
+        return res.status(400).send({message:'No job found'})
+    }
+}catch(err){
+    return res.status(400).send({message:'Internal Server error'})
 }
 }

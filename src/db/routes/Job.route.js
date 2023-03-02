@@ -4,6 +4,7 @@ const router=require('express').Router()
 router.post('/Create/:id',JobController.AddJobs)
 router.delete('/Delete/:id',JobController.DeleteJob)
 router.get('/Get',JobController.getJob)
+router.get('/getJobDetail/:id',JobController.getJobDetails)
 router.get('/GetByCompany/:id',JobController.getJobByCompany)
 router.put('/UpdateVacncies',JobController.updateVacancies)
 
