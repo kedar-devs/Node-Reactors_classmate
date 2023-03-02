@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography'
 import { Chip } from '@material-ui/core'
 import WorkIcon from '@material-ui/icons/Work'
 import BusinessIcon from '@material-ui/icons/Business'
-import LocationOnIcon from '@material-ui/icons/LocationOn'
+import {ReactComponent as Psych} from './../JobPosting/psych.svg'
 import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles({
@@ -51,27 +51,28 @@ export default function OutlinedCard({ job }) {
 						color='secondary'
 						icon={<WorkIcon />}
 						size='small'
-						label={job.post}
+						label={job.Role}
 						className={classes.chip}
 					/>
 				</Typography>
 				<Typography variant='h5' component='h2'>
-					{job.job}
+					{job.jobTitle}
 				</Typography>
 				<Typography className={classes.pos} color='textSecondary'>
-					<BusinessIcon className={classes.icon} /> {job.companyName}
+					<BusinessIcon className={classes.icon} /> {job.Jobtype}
 				</Typography>
 				<Typography className={classes.pos} color='textSecondary'>
-					<LocationOnIcon className={classes.icon} /> {job.location}
+					<Psych className={classes.icon} /> {job.Skills}
 				</Typography>
 			</CardContent>
 			<CardActions>
-				<Link to={`/jobs/${job.id}`} style={{ textDecoration: 'none' }}>
+				<Link to={`/jobs/${job._id}`} style={{ textDecoration: 'none' }}>
 					<Button size='small' variant='contained' color='primary'>
 						View
 					</Button>
 				</Link>
 			</CardActions>
 		</Card>
+        
 	)
 }

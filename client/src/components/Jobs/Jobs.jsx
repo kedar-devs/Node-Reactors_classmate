@@ -1,6 +1,7 @@
 import { createStyles, Grid, makeStyles, Typography } from '@material-ui/core'
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import Job from './Job'
+import Axios from 'axios'
 import jobs from './jobData'
 
 const useStyles = makeStyles((theme) =>
@@ -17,7 +18,18 @@ const useStyles = makeStyles((theme) =>
 
 const Jobs = (props) => {
 	const classes = useStyles()
+	const [jobs,setJobs]=useState([])
+    const [loading,setLoading]=useState(true)
+	useEffect(()=>{
+		Axios.get(`http://localhost:5000/job/Get`)
+		.then(res=>{
+			setJobs(res.data.FoundJob)
+			setLoading(false)
+		})
+},[])
 	return (
+		<>
+		 {!loading?
 		<Grid container>
 			<Typography variant='h3' component='h1' className={classes.heading}>
 				Internships & Jobs
@@ -31,7 +43,8 @@ const Jobs = (props) => {
 					)
 				})}
 			</Grid>
-		</Grid>
+		</Grid>:<></>}
+		</>
 	)
 }
 

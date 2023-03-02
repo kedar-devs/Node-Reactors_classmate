@@ -6,7 +6,7 @@ import {
 	makeStyles,
 	Typography,
 } from '@material-ui/core'
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import LinkedInIcon from '@material-ui/icons/LinkedIn'
 import LocationOnIcon from '@material-ui/icons/LocationOn'
 import jobs from './jobData'
@@ -83,19 +83,34 @@ const useStyles = makeStyles((theme) =>
 const JobDescription = ({history}) => {
 	const classes = useStyles()
 	let { id } = useParams()
-	id = parseInt(id)
-	const job = jobs.filter((j) => j.id === id)[0]
+	const [job,setJob]=useState()
+	const [loading,setLoading]=useState(true)
+	const [isApplied,setApplied]=useState(false)
+	useEffect(()=>{
+		axios.get(`http://localhost:5000/job/getJobDetail/${id}`)
+		.then(res=>{
+			console.log(res.data)
+			setJob(res.data)
+			setLoading(false)
+			
+		})
+		.catch(err=>{
+			console.log(err)
+			alert(err.data.message)
+		})
+	},[])
 	const submitresume = () => {
         let token = JSON.parse(localStorage.getItem("classmate"))
         if (!token) 
             history.push("/login")
         console.log(token.userId);
-		axios.post("http://localhost:5000/student/ApplyJob/",{
-			empemail: job.email,
-			userId: token.userId
+		axios.post("http://localhost:5000/job/Apply",{
+			jobId: job._id,
+			StudentId: token.userId
 		}).then(res => {
 			console.log("sucessfully applied for job");
 			console.log(res);
+			setApplied(true)
 		}).catch(err => {
 			console.log("there is an error here in applying for job");
 			console.log(err);
@@ -103,6 +118,7 @@ const JobDescription = ({history}) => {
 	}
 	return (
 		<>
+		{!loading?
 		<Grid
 			container
 			className={classes.root}
@@ -120,17 +136,17 @@ const JobDescription = ({history}) => {
 			<Grid item xs={12} md={8}>
 				{/* Main */}
 				<div className={classes.main}>
-					<Typography className={classes.title}>{job.companyName}</Typography>
+					<Typography className={classes.title}>{job.compName}</Typography>
 					<Typography className={classes.subtitle}>
 						<LocationOnIcon className={classes.icon} /> {job.location}
 					</Typography>
 					<Typography variant='h5' component='h2' className={classes.job}>
-						{job.job}
+						{job.role}
 						<br />
 						<Chip
 							color='secondary'
 							size='small'
-							label={job.post}
+							label={job.jobTitle}
 							className={classes.chip}
 						/>
 					</Typography>
@@ -141,30 +157,30 @@ const JobDescription = ({history}) => {
 					<Typography className={classes.subtitle}>
 						<span className={classes.properties}>
 							Recruiter's Name (SPOC):{' '}
-						</span>{' '}
+						</span>{job.recName}
 						<span
 							className={classes.values}
-						>{`${job.firstName} ${job.lastName}`}</span>
+						>{`${job.recrName}`}</span>
 					</Typography>
 					<Typography className={classes.subtitle}>
 						<span className={classes.properties}>Email: </span>{' '}
 						<span className={classes.values}>
-							<a href={`mailto:${job.email}`}>{job.email}</a>
+							<a href={`mailto:${job.recEmail}`}>{job.recEmail}</a>
 						</span>
 					</Typography>
 					<Typography className={classes.subtitle}>
 						<span className={classes.properties}>Number of Employees: </span>{' '}
-						<span className={classes.values}>{job.noOfEmp}</span>
+						<span className={classes.values}>{job.numEmp}</span>
 					</Typography>
 					<Typography className={classes.subtitle}>
 						<div className={classes.mainDesc}>
 							<span className={classes.properties}>Description: </span>
-							<span className={classes.values}>{job.description}</span>
+							<span className={classes.values}>{job.desc}</span>
 						</div>
 					</Typography>
 					<Typography className={classes.subtitle}>
 						<span className={classes.properties}>Type: </span>
-						<span className={classes.values}>{job.type}</span>
+						<span className={classes.values}>{job.jobType}</span>
 					</Typography>
 					<Typography className={classes.subtitle}>
 						<div className={classes.mainDesc}>
@@ -175,7 +191,7 @@ const JobDescription = ({history}) => {
 					</Typography>
 				</div>
 			</Grid>
-			</Grid>
+			</Grid>:<></>}
 	</>		
 	);
 }

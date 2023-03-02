@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography'
 import { Chip } from '@material-ui/core'
 import WorkIcon from '@material-ui/icons/Work'
 import BusinessIcon from '@material-ui/icons/Business'
-import LocationOnIcon from '@material-ui/icons/LocationOn'
+
 import {ReactComponent as Psych} from './psych.svg'
 import { Link } from 'react-router-dom'
 
@@ -69,7 +69,7 @@ export default function OutlinedCard({ job }) {
 				</Typography>
 			</CardContent>
 			<CardActions>
-				<Link to={`/jobs/${job.id}`} style={{ textDecoration: 'none' }}>
+				<Link to={`/jobs/${job._id}`} style={{ textDecoration: 'none' }}>
 					<Button size='small' variant='contained' color='primary'>
 						View
 					</Button>
