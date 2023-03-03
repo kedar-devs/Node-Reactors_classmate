@@ -103,6 +103,7 @@ exports.getJobDetails=async(req,res)=>{
     const FoundJob=await JobModel.findOne({_id:id})
     if(FoundJob){
         const responseData={
+            id:FoundJob._id,
             compName:'',
             location:'',
             role:FoundJob.Role,

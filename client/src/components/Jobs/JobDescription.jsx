@@ -92,6 +92,15 @@ const JobDescription = ({history}) => {
 			console.log(res.data)
 			setJob(res.data)
 			setLoading(false)
+			let token = JSON.parse(localStorage.getItem("classmate"))
+			if (token){
+				axios.put('http://localhost:5000/job/CheckApplies',{
+					jobId: res.data.id,
+					StudentId: token.userId
+				}).then(res=>{
+					setApplied(true)
+				})
+			} 
 			
 		})
 		.catch(err=>{
@@ -103,9 +112,9 @@ const JobDescription = ({history}) => {
         let token = JSON.parse(localStorage.getItem("classmate"))
         if (!token) 
             history.push("/login")
-        console.log(token.userId);
+        console.log(token.userId,job);
 		axios.post("http://localhost:5000/job/Apply",{
-			jobId: job._id,
+			jobId: job.id,
 			StudentId: token.userId
 		}).then(res => {
 			console.log("sucessfully applied for job");
@@ -128,9 +137,11 @@ const JobDescription = ({history}) => {
 			{/* Company Logo */}
 			<Grid item xs={12} md={4} className={classes.img}>
 				<LinkedInIcon className={classes.companyIcon} />
-				<Button variant='contained' color='primary' onClick={submitresume}>
+				{!isApplied?<Button variant='contained' color='primary' onClick={submitresume}>
 					Apply
-				</Button>
+				</Button>:<Button variant='contained' color='secondary'>
+					Applied
+				</Button>}
 			</Grid>
 			{/* Job Description */}
 			<Grid item xs={12} md={8}>

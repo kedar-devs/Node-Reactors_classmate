@@ -52,6 +52,7 @@ router.route("/add").post((req, res) => {
           password,
           resetToken,
           expiresToken,
+          resume
         });
         bcrypt.hash(newUser.password, saltRound, (err, hash) => {
           if (err) throw err;
@@ -224,8 +225,6 @@ router.post("/new-password", (req, res) => {
 });
 router.post("/AddResume",  (req, res) => {
   try {
-    const url = req.protocol + "://" + req.get("host");
-
     User.findOneAndUpdate({ _id: req.body.id }).then((user) => {
       user.resume = url + "/Notes/" + req.file.filename;
       user

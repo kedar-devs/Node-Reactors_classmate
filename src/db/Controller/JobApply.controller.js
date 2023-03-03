@@ -1,6 +1,7 @@
 const JobApplyModel=require('./../model/JobApply.model')
 exports.ApplyJob=async(req,res)=>{
     try{
+        console.log(req.body)
     const {jobId,StudentId}=req.body
     const newApply={
         jobId:jobId,
