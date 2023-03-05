@@ -4,10 +4,7 @@ import Modal from '@material-ui/core/Modal'
 import Backdrop from '@material-ui/core/Backdrop'
 import Fade from '@material-ui/core/Fade'
 import AddClasswork from './AddWidgets/AddClasswork'
-import AddSubject from './AddWidgets/AddSubject'
-import AddNotes from './AddWidgets/AddNotes'
-import AddLink from './AddWidgets/AddLink'
-import AddJob from './AddWidgets/AddJob'
+
 
 const useStyles = makeStyles((theme) => ({
 	modal: {

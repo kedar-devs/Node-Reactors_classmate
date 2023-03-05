@@ -5,11 +5,10 @@ import {
 	createStyles,
 	Grid
 } from '@material-ui/core'
-import { Field } from 'formik'
-import { TextField } from 'formik-material-ui'
+
 import React,{useState} from 'react'
 import axios from 'axios'
-import { id } from 'date-fns/locale'
+
 const useStyles = makeStyles((theme) =>
 	createStyles({
 		// root: {
@@ -93,12 +92,8 @@ const useStyles = makeStyles((theme) =>
 const AddResume = ({id,history}) => {
 	const classes = useStyles()
 	console.log(id);
-    const [name,setname]=useState("")
     const [file, setfile] = useState("")
-    const [img,setImage]=useState("")
-    const uploadpic=(e)=>{
-        setfile(e.target.value)
-    }
+ 
     const submit=(e)=>{
         e.preventDefault()
         let token = JSON.parse(localStorage.getItem("classmate"))
@@ -109,8 +104,6 @@ const AddResume = ({id,history}) => {
 		data.set('encType','multipart/form-data')
 		data.append("resume", file)
 		data.append("id",token.userId)
-        const multerimage=URL.createObjectURL(file)
-        alert(multerimage)
         axios.post("http://localhost:5000/student/AddResume",data)
         .then(res=>{
             console.log(res)

@@ -9,7 +9,7 @@ import {
 import React,{useState,useEffect} from 'react'
 import LinkedInIcon from '@material-ui/icons/LinkedIn'
 import LocationOnIcon from '@material-ui/icons/LocationOn'
-import jobs from './jobData'
+
 import { useParams } from 'react-router-dom'
 import axios from "axios"
 const useStyles = makeStyles((theme) =>

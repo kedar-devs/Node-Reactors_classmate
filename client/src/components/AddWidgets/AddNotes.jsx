@@ -5,11 +5,9 @@ import {
 	createStyles,
 	Grid
 } from '@material-ui/core'
-import { Field } from 'formik'
 import { TextField } from 'formik-material-ui'
 import React,{useState} from 'react'
 import axios from 'axios'
-import { id } from 'date-fns/locale'
 const useStyles = makeStyles((theme) =>
 	createStyles({
 		// root: {
@@ -95,10 +93,7 @@ const AddNotes = ({id}) => {
 	console.log(id);
     const [name,setname]=useState("")
     const [file, setfile] = useState("")
-    const [img,setImage]=useState("")
-    const uploadpic=(e)=>{
-        setfile(e.target.value)
-    }
+
     const submit=(e)=>{
         e.preventDefault()
 		const data = new FormData();

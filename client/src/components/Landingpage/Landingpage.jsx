@@ -84,6 +84,7 @@ function Landingpage() {
     )
     }else{
         history.push('/home')
+        return(<></>)
     }
 }
 

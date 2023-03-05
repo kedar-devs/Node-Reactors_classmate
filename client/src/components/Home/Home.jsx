@@ -5,7 +5,7 @@ import finance from "../../assets/money.svg"
 import internships from "../../assets/jobs.svg"
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from "react-router-dom"
-import axios from "axios"
+
 const useStyles = makeStyles((theme) => ({
     svgicon: {
         width: "180px",

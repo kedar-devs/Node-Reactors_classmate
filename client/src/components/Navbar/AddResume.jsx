@@ -25,12 +25,13 @@ const useStyles = makeStyles((theme) => ({
 export default function AddResumes(history) {
     const classes = useStyles()
     const [open, setOpen] = React.useState(false)
+    const [id,setId]=React.useState()
 
     const handleOpen = () => {
         let token = JSON.parse(localStorage.getItem("classmate"))
         if (!token) 
             history.push("/login")
-        console.log(token.userId);
+        setId(token.userId);
         axios.get("http://localhost:5000/student/user/" + token.userId)
             .then(res => {
             console.log(res.data);
@@ -60,7 +61,7 @@ export default function AddResumes(history) {
                 }}
             >
                 <Fade in={open}>
-                    <AddResume />
+                    <AddResume id={id}/>
                 </Fade>
             </Modal>
         </div>

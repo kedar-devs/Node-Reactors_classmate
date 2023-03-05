@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from 'react'
+import React,{useState} from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography } from "@material-ui/core"
 import AssignmentIcon from '@material-ui/icons/Assignment';
@@ -7,7 +7,6 @@ import BookIcon from '@material-ui/icons/Book';
 import LinkIcon from '@material-ui/icons/Link';
 import {CardActionArea} from '@material-ui/core';
 import AssignmentPage from '../Assignment/AssignmentPage';
-import axios from "axios"
 import Notespage from '../Notes/Notespage';
 import LinkPage from "../LinkCard/LinkPage"
 import Analytics from '../Analytics/Analytics';
@@ -90,9 +89,9 @@ function Sidebar({match}) {
                 </Grid>
                 <Grid container item sm={10} md={11}>
                     {
-                        opens==0?
-                            <AssignmentPage id={match.params.id} /> : opens == 1?
-                        <Notespage id={match.params.id}/>:opens==2?<Analytics id={match.params.id} />: <LinkPage id={match.params.id} />
+                        opens===0?
+                            <AssignmentPage id={match.params.id} /> : opens === 1?
+                        <Notespage id={match.params.id}/>:opens===2?<Analytics id={match.params.id} />: <LinkPage id={match.params.id} />
                     }
             </Grid>
             </Grid>      

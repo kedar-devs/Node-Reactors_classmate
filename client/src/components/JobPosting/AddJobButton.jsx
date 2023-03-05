@@ -16,7 +16,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AddAssignment({data}) {
     const history=useHistory()
-    const classes = useStyles()
 	const [open, setOpen] = React.useState(false)
     const navigate=()=>{
         let user=JSON.parse(localStorage.getItem('classmateRecruitor'))

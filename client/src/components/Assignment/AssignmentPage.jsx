@@ -2,10 +2,10 @@
 import AssignmentSection from './AssignmentSection'
 import { Grid } from "@material-ui/core"
 import axios from "axios"
-import {Link} from "react-router-dom"
+
 import React, { Component } from 'react'
 import AddAssignment from './AddAssignment'
-import AddIcon from '@material-ui/icons/Add';
+
 
 export default class AssignmentPage extends Component {
     constructor(props) {
@@ -22,7 +22,6 @@ export default class AssignmentPage extends Component {
            let token = JSON.parse(localStorage.getItem("classmate"))
         if (!token)
             this.props.history.push("/login")
-        let p = [];
         console.log(token.userId);
         axios.get("http://localhost:5000/classwork/GetAssignment/" + this.props.id)
             .then(res => {
@@ -33,9 +32,9 @@ export default class AssignmentPage extends Component {
                 for (let i = 0; i < res.data.length; i++) {
                     // k.push(res.data[i])
                     console.log(res.data[i].statuse);
-                    if (res.data[i].statuse == -1)
+                    if (res.data[i].statuse === -1)
                         work.push(res.data[i])
-                    else if (res.data[i].statuse == 0)
+                    else if (res.data[i].statuse === 0)
                         review.push(res.data[i])
                     else
                         completed.push(res.data[i])

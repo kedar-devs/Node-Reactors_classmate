@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import NoteIcon from '@material-ui/icons/Note';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import {CloudinaryContext,Image,Transformation} from 'cloudinary-react'
-import fileDownload from 'js-file-download'
-import axios from'axios'
+
 import Pdf from "../Pdf/Pdf"
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -23,22 +22,9 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const DownloadFile=(link,title)=>{
-    axios.get(link,{
-        responseType: "blob"
-      })
-    .then(res=>{
-        console.log(res)
-        fileDownload(res.data, title);
-    })
-    .catch(err=>{
-        console.log(err)
-    })
-}
-
 export default function NoteCard({data}) {
   const classes = useStyles();
-    const [open, setopen] = useState(false)
+    const open = false
     return (
         <>
         <CloudinaryContext cloud_name='dw8ery8pa'>
@@ -47,7 +33,7 @@ export default function NoteCard({data}) {
                     <Typography variant="h5" component="h2">
                         <NoteIcon size="large"/> {"  "}
                         {data.title}
-                        <a href={data.link} target="_blank" download>
+                        <a href={data.link} target="_blank" download rel="noreferrer">
                             download
                             <Image publicid={data.title}>
                                 <Transformation fetchFormat="auto" />
@@ -57,7 +43,7 @@ export default function NoteCard({data}) {
                 </CardContent>
             </Card>
                 {
-                    open==true?<Pdf data={data} />:<></>
+                    open===true?<Pdf data={data} />:<></>
                 }
         </CloudinaryContext>
         </>
