@@ -84,7 +84,7 @@ const AddExpense = (props) => {
 		setTimeout(() => {
 			setSubmitting(false)
 			let token = JSON.parse(localStorage.getItem("classmate"))
-			axios.post(`http://localhost:5000/finance/add/${token.userId}`,{reason:values.expense,amount:values.amount})
+			axios.post(` /finance/add/${token.userId}`,{reason:values.expense,amount:values.amount})
 			.then(result=>{
 				history.push('/expenses')
 			})

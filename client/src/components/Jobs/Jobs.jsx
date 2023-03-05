@@ -21,7 +21,7 @@ const Jobs = (props) => {
 	const [jobs,setJobs]=useState([])
     const [loading,setLoading]=useState(true)
 	useEffect(()=>{
-		Axios.get(`http://localhost:5000/job/Get`)
+		Axios.get(` /job/Get`)
 		.then(res=>{
 			setJobs(res.data.FoundJob)
 			setLoading(false)

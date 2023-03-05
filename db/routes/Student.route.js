@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const path = require("path");
 const saltRound = 8;
+let streamifier=require('./../Helper/FileUploader')
 //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
 const nodemailer = require("nodemailer");
 
@@ -225,8 +226,11 @@ router.post("/new-password", (req, res) => {
 });
 router.post("/AddResume",  (req, res) => {
   try {
-    User.findOneAndUpdate({ _id: req.body.id }).then((user) => {
-      user.resume = url + "/Notes/" + req.file.filename;
+    console.log(req.body,req.files)
+    const file=req.files.resume
+    User.findOneAndUpdate({ _id: req.body.id }).then(async(user) => {
+      let url1 =await streamifier.UploadFile(file)
+      user.resume=url1.url
       user
         .save()
         .then((result) => res.status(200).send({ result }))
@@ -243,8 +247,8 @@ router.post("/ApplyJob", (req, res) => {
       if (err) {
         console.log(err);
       }
-      console.log(user.resume.replace("http://localhost:5000", ""));
-      const mailpath = user.resume.replace("http://localhost:5000", "");
+      console.log(user.resume.replace(" ", ""));
+      const mailpath = user.resume.replace(" ", "");
       console.log(mailpath);
       transporter.sendMail(
         {

@@ -117,7 +117,7 @@ const CompanySignup = ({ signUp, company }) => {
 	const submit = (values, { setSubmitting }) => {
 		setTimeout(() => {
 			setSubmitting(false)
-			axios.post("http://localhost:5000/recruitor/add", values)
+			axios.post(" /recruitor/add", values)
 				.then(res => {
 				console.log("Company successfully added");
 				localStorage.setItem('classmateRecruitor',{

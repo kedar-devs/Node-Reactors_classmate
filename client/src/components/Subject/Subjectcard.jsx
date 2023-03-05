@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
                     else {
                         let p = [];
                         console.log(token.userId);
-                        axios.get("http://localhost:5000/classwork/GetSub/" + token.userId)
+                        axios.get(" /classwork/GetSub/" + token.userId)
                             .then(res => {
                                 let k = []
                                 console.log(res.data.Subject[0]);

@@ -93,11 +93,11 @@ const StudentSignup = ({ history }) => {
 		setTimeout(() => {
 			setSubmitting(false)
 			if (values.password === values.confirmPassword) {
-				axios.post("http://localhost:5000/student/add", values)
+				axios.post(" /student/add", values)
 					.then(res => {
 						console.log("User successfully added");
 						console.log(res.data);
-						axios.post("http://localhost:5000/classwork/addStudent/" + res.data.user._id, {
+						axios.post(" /classwork/addStudent/" + res.data.user._id, {
 							id: res.data.user._id
 						}).then(res => {
 							console.log("Success");

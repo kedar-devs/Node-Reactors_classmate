@@ -32,7 +32,7 @@ export default function AddResumes(history) {
         if (!token) 
             history.push("/login")
         setId(token.userId);
-        axios.get("http://localhost:5000/student/user/" + token.userId)
+        axios.get(" /student/user/" + token.userId)
             .then(res => {
             console.log(res.data);
             }).catch(err => {

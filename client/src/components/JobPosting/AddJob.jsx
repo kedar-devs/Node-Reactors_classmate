@@ -117,7 +117,7 @@ const JobSignUp = ({ signUp, company }) => {
 		setTimeout(() => {
 			setSubmitting(false)
 			console.log(id)
-			axios.post(`http://localhost:5000/job/Create/${id}`,values)
+			axios.post(` /job/Create/${id}`,values)
 				.then(res => {
 				console.log("Company successfully added");
 				history.push(`/company/${id}`)

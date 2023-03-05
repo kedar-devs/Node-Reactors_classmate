@@ -87,14 +87,14 @@ const JobDescription = ({history}) => {
 	const [loading,setLoading]=useState(true)
 	const [isApplied,setApplied]=useState(false)
 	useEffect(()=>{
-		axios.get(`http://localhost:5000/job/getJobDetail/${id}`)
+		axios.get(` /job/getJobDetail/${id}`)
 		.then(res=>{
 			console.log(res.data)
 			setJob(res.data)
 			setLoading(false)
 			let token = JSON.parse(localStorage.getItem("classmate"))
 			if (token){
-				axios.put('http://localhost:5000/job/CheckApplies',{
+				axios.put(' /job/CheckApplies',{
 					jobId: res.data.id,
 					StudentId: token.userId
 				}).then(res=>{
@@ -113,7 +113,7 @@ const JobDescription = ({history}) => {
         if (!token) 
             history.push("/login")
         console.log(token.userId,job);
-		axios.post("http://localhost:5000/job/Apply",{
+		axios.post(" /job/Apply",{
 			jobId: job.id,
 			StudentId: token.userId
 		}).then(res => {

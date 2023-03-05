@@ -94,7 +94,7 @@ const AddLink = ({id,history}) => {
 	const submit = (values, { setSubmitting }) => {
 		setTimeout(() => {
 			setSubmitting(false)
-			axios.put("http://localhost:5000/classwork/addLink/" + id, {
+			axios.put(" /classwork/addLink/" + id, {
 				title: values.title,
 				link: values.link,
 				subid: id

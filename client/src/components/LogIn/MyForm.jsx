@@ -85,7 +85,7 @@ const LoginForm = ({ signUp, company ,history}) => {
 		setTimeout(() => {
 			setSubmitting(false)
 			if (!company) {
-				axios.post("http://localhost:5000/student/login", values)
+				axios.post(" /student/login", values)
 					.then(res => {
 						console.log("successfully authenticated");
 						console.log(res.data);
@@ -100,7 +100,7 @@ const LoginForm = ({ signUp, company ,history}) => {
 				})
 			} else {
 				values.company = true
-				axios.post("http://localhost:5000/recruitor/login", values)
+				axios.post(" /recruitor/login", values)
 					.then(res => {
 						console.log("Company authenticated",res);
 						localStorage.setItem('classmateRecruitor',JSON.stringify({

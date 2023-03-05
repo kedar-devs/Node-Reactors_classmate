@@ -11,7 +11,7 @@ export default class Notespage extends Component {
         }
     }
     componentDidMount() {
-        axios.get("http://localhost:5000/classwork/GetNotes/" + this.props.id)
+        axios.get(" /classwork/GetNotes/" + this.props.id)
             .then(res => {
                 let k=[]
                 console.log(res.data[0]);

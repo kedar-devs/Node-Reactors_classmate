@@ -104,7 +104,7 @@ const AddNotes = ({id}) => {
 		console.log(file)
         const multerimage=URL.createObjectURL(file)
         alert(multerimage)
-        axios.put("http://localhost:5000/classwork/addNotes/"+id,data)
+        axios.put(" /classwork/addNotes/"+id,data)
         .then(res=>{
             console.log(res)
 			window.location.reload()
@@ -181,7 +181,7 @@ export default AddNotes
 //         data.append("file",file)
 //         const multerimage=URL.createObjectURL(file)
 //         alert(multerimage)
-//         axios.post("http://localhost:5000/user/upload",data)
+//         axios.post(" /user/upload",data)
 //         .then(res=>{
 //             console.log(res)
 //         }).catch(err=>{

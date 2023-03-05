@@ -89,7 +89,7 @@ const AddSubject = ({history}) => {
 			console.log(values)
 			let token = JSON.parse(localStorage.getItem("classmate"))
 			
-			axios.put("http://localhost:5000/classwork/addSubject/" + token.userId, values)
+			axios.put(" /classwork/addSubject/" + token.userId, values)
 				.then(res => {
 					console.log("Successfully added a subject");
 					console.log(res);

@@ -20,7 +20,7 @@ function Expenses() {
 	const [loading,setLoading]=useState(true)
 	useEffect(()=>{
 		let user = JSON.parse(localStorage.getItem("classmate"))
-		Axios.get(`http://localhost:5000/finance/getExpenses/${user.userId}`)
+		Axios.get(` /finance/getExpenses/${user.userId}`)
 		.then(res=>{
 			console.log(res.data)
 			setExpense(res.data.user)

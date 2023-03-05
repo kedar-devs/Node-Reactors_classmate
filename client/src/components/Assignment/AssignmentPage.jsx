@@ -23,7 +23,7 @@ export default class AssignmentPage extends Component {
         if (!token)
             this.props.history.push("/login")
         console.log(token.userId);
-        axios.get("http://localhost:5000/classwork/GetAssignment/" + this.props.id)
+        axios.get(" /classwork/GetAssignment/" + this.props.id)
             .then(res => {
                 let work = []
                 let review = []

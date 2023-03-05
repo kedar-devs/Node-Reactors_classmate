@@ -133,7 +133,7 @@ const AddClasswork = ({id}) => {
 			console.log(values);
 			console.log(id);
 			let token = JSON.parse(localStorage.getItem("classmate"))
-			axios.put("http://localhost:5000/classwork/addAssign/" + token.userId, {
+			axios.put(" /classwork/addAssign/" + token.userId, {
 				aname:values.aname,
 				grades: values.grades,
 				dueDate: values.dueDate,

@@ -24,7 +24,7 @@ export default class LinkPage extends Component {
         }
     }
     componentDidMount() {
-        axios.get("http://localhost:5000/classwork/GetNotesExt/" + this.props.id)
+        axios.get(" /classwork/GetNotesExt/" + this.props.id)
         .then(res => {
             let k=[]
             console.log(res.data.Notes[0]);

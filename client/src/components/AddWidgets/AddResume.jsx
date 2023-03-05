@@ -104,7 +104,7 @@ const AddResume = ({id,history}) => {
 		data.set('encType','multipart/form-data')
 		data.append("resume", file)
 		data.append("id",token.userId)
-        axios.post("http://localhost:5000/student/AddResume",data)
+        axios.post(" /student/AddResume",data)
         .then(res=>{
             console.log(res)
 			window.location.reload()

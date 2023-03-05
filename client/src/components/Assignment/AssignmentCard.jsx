@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
 function AssignmentCard({ status, element }) {
   const handleUpdate=(aid,status)=>{
-    axios.put(`http://localhost:5000/classwork/addAssStatus/${ element.subid}`,{aid,status})
+    axios.put(` /classwork/addAssStatus/${ element.subid}`,{aid,status})
     .then(result=>{
         alert('Status Updated Succesfully')
         window.location.reload()
